@@ -13,6 +13,11 @@
 #define CONFIG_BOARD_DESCRIPTION	"SBC Pro"
 #define BOARD_DEY_NAME			"ccimx8x-sbc-pro"
 
+#define CONFIG_WATCHDOG
+#define CONFIG_HW_WATCHDOG
+#define CONFIG_IMX_WATCHDOG
+#define CONFIG_WATCHDOG_TIMEOUT_MSECS
+
 #define CONFIG_REMAKE_ELF
 
 /* GPIO configs */

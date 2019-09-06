@@ -306,37 +306,6 @@ void mca_init(void)
 
 	printf("\n");
 }
-#if defined(CONFIG_SYS_I2C_MXC) && defined(CONFIG_MCA_WATHDOG_INIT)
-void mac_wd_init(void)
-{
-	unsigned char control = 0;
-	unsigned char timeout = 0;
-	int ret;
-#ifndef CONFIG_MCA_WATHCDOG_TIMEOUT_MSECS
-#define CONFIG_MCA_WATHCDOG_TIMEOUT_MSECS 255000
-#endif
-
-	timeout = CONFIG_MCA_WATHCDOG_TIMEOUT_MSECS / 1000;
-
-	ret = mca_write_reg(MCA_WDT_TIMEOUT, timeout);
-	if(ret)
-	{
-		printf("MCA: could not wet watchdog timeout %d\n", ret);
-		goto err;
-	}
-	control = MCA_WDT_ENABLE | MCA_WDT_FULLRESET;
-
-	ret = mca_update_bits(MCA_WDT_CONTROL, MCA_WDT_ENABLE | MCA_WDT_FULLRESET, control);
-	if(ret)
-	{
-		printf("MCA could not enable watchdog:%d\n", ret);
-	}
-	printf("MCA watchdog initialized (T:%d)\n", timeout);
-err:
-	return;
-}
-#endif
-
 
 #if defined(CONFIG_SYS_I2C_MXC) && defined(CONFIG_MCA_WATHDOG_INIT)
 void mac_wd_init(void)
@@ -415,6 +384,7 @@ int ccimx6ul_init(void)
 #ifdef CONFIG_SYS_I2C_MXC
 	setup_i2c(0, CONFIG_SYS_I2C_SPEED, 0x7f, &i2c1_pad_info);
 	mca_init();
+	mac_wd_init();
 #endif
 
 #ifdef CONFIG_SYS_USE_NAND

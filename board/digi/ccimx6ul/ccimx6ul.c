@@ -307,8 +307,8 @@ void mca_init(void)
 	printf("\n");
 }
 
-#if defined(CONFIG_SYS_I2C_MXC) && defined(CONFIG_MCA_WATHDOG_INIT)
-void mac_wd_init(void)
+//#if defined(CONFIG_SYS_I2C_MXC) && defined(CONFIG_MCA_WATHDOG_INIT)
+void mca_wd_init(void)
 {
 	unsigned char control = 0;
 	unsigned char timeout = 0;
@@ -336,7 +336,7 @@ void mac_wd_init(void)
 err:
 	return;
 }
-#endif
+//#endif
 
 int ccimx6ul_init(void)
 {
@@ -384,7 +384,7 @@ int ccimx6ul_init(void)
 #ifdef CONFIG_SYS_I2C_MXC
 	setup_i2c(0, CONFIG_SYS_I2C_SPEED, 0x7f, &i2c1_pad_info);
 	mca_init();
-	mac_wd_init();
+	mca_wd_init();
 #endif
 
 #ifdef CONFIG_SYS_USE_NAND

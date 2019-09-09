@@ -247,7 +247,7 @@ void mca_wd_init(void)
 	unsigned char timeout = 0;
 	int ret;
 #ifndef CONFIG_MCA_WATHCDOG_TIMEOUT_MSECS
-#define CONFIG_MCA_WATHCDOG_TIMEOUT_MSECS 10000
+#define CONFIG_MCA_WATHCDOG_TIMEOUT_MSECS 60000
 #endif
 
 	timeout = CONFIG_MCA_WATHCDOG_TIMEOUT_MSECS / 1000;

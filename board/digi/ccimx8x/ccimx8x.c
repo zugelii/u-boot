@@ -241,7 +241,7 @@ void print_ccimx8x_info(void)
 			ccimx8x_variants[my_hwid.variant].id_string);
 }
 //#if defined(CONFIG_SYS_I2C_MXC) && defined(CONFIG_MCA_WATHDOG_INIT)
-void mca_wd_init(void)
+void mca_wd_start(void)
 {
 	unsigned char control = 0;
 	unsigned char timeout = 0;
@@ -269,6 +269,16 @@ void mca_wd_init(void)
 err:
 	return;
 }
+void mca_wd_stop(void)
+{
+	int ret;
+	ret = mca_update_bits(MCA_WDT_CONTROL, MCA_WDT_ENABLE, 0);
+	if(ret)
+	{
+		printf("MCA could not enable watchdog:%d\n", ret);
+	}
+	printf("MCA watchdog stop\n");
+}
 //#endif
 
 int ccimx8_init(void)
@@ -279,7 +289,7 @@ int ccimx8_init(void)
 	}
 
 	mca_init();
-	mca_wd_init();
+	mca_wd_start();
 #ifdef CONFIG_MCA_TAMPER
 	mca_tamper_check_events();
 #endif

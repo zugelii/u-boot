@@ -184,6 +184,7 @@ int checkboard(void)
 {
 	board_version = get_carrierboard_version();
 	board_id = get_carrierboard_id();
+	printf("board_version: %d board_id : %d\r\n", board_version, board_id);
 
 	print_ccimx8x_info();
 	print_carrierboard_info();
@@ -386,7 +387,7 @@ int board_init(void)
 	/* SOM init */
 	ccimx8_init();
 
-	board_power_led_init();
+	//board_power_led_init();
 
 #ifdef CONFIG_MXC_GPIO
 	board_gpio_init();

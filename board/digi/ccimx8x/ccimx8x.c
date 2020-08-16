@@ -248,7 +248,7 @@ int ccimx8_init(void)
 		return -1;
 	}
 
-	mca_init();
+	//mca_init();
 
 #ifdef CONFIG_MCA_TAMPER
 	mca_tamper_check_events();
